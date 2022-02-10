@@ -1,6 +1,6 @@
 {
   "name": "discord-spams",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Discord spam protection library written in TypeScript by the discord.ts community",
   "exports": {
     ".": {
@@ -30,9 +30,9 @@
     "lint": "eslint ./"
   },
   "license": "Apache-2.0",
-  "homepage": "https://discord-ts.js.org",
+  "homepage": "https://github.com/oceanroleplay/discord-spams",
   "bugs": {
-    "url": "https://github.com/oceanroleplay/discord.ts/issue",
+    "url": "https://github.com/oceanroleplay/discord-spams/issue",
     "email": "indianoceanroleplay@gmail.com"
   },
   "repository": {
