@@ -61,6 +61,7 @@ export class Spam {
 
     // update master list every five minute, will not be updated if event is not called
     if (!this.lastUpdate || Date.now() - this.lastUpdate > 5 * 60 * 1000) {
+      SpamMeta.clear();
       await SpamMeta.refreshMasterList();
       this.lastUpdate = Date.now();
     }
