@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const globalListUrl =
-  "https://raw.githubusercontent.com/oceanroleplay/discord-spams/main/src/spamLinks.txt";
+  "https://raw.githubusercontent.com/oceanroleplay/discord-spams/main/spamLinks.txt";
 
 export class SpamMeta {
   private static _spamLinks: string[] = [];
