@@ -46,6 +46,48 @@ npm install discord-spams
 yarn add discord-spams
 ```
 
+# Example
+
+```ts
+@Discord()
+export class Spam {
+  lastUpdate: number | null = null;
+
+  @On("messageCreate")
+  async handler([message]: ArgsOf<"messageCreate">): Promise<void> {
+    if (!message.guild || !message.member || message.author.bot) {
+      return;
+    }
+
+    if (!this.lastUpdate || Date.now() - this.lastUpdate > 5 * 60 * 1000) {
+      await SpamMeta.refreshMasterList();
+      this.lastUpdate = Date.now();
+    }
+
+    if (SpamMeta.isSpam(message.content)) {
+      await message.delete().catch(() => null);
+
+      const isMuted = await message.member
+        .disableCommunicationUntil(
+          Date.now() + 6 * 60 * 60 * 1000,
+          "Spam message detected"
+        )
+        .catch(() => null);
+
+      if (isMuted) {
+        message.channel.send(
+          `:cold_face: Spam message detected, I have muted ${message.author} for 6 hours.`
+        );
+      } else {
+        message.channel.send(
+          `:cold_face: Spam message detected from ${message.author}, please allow me to mute members!`
+        );
+      }
+    }
+  }
+}
+```
+
 # FAQ
 
 ## 1. How to deal with new spam messages and links?
