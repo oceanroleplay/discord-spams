@@ -25,6 +25,9 @@ export class SpamMeta {
   }
 
   static isSpam(content: string): boolean {
+    if (content.startsWith("https://discord.gift")) {
+      return false;
+    }
     return this._spamLinks.some((link) => {
       return RegExp(link, "gm").test(content);
     });
