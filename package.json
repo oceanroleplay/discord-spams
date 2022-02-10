@@ -1,0 +1,61 @@
+{
+  "name": "discord-spams",
+  "version": "1.0.0",
+  "description": "Discord spam protection library written in TypeScript by the discord.ts community",
+  "exports": {
+    ".": {
+      "import": "./build/esm/index.js",
+      "require": "./build/cjs/index.js"
+    }
+  },
+  "main": "./build/cjs/index.js",
+  "module": "./build/esm/index.js",
+  "files": [
+    "build",
+    "LICENSE",
+    "README.md",
+    "SECURITY.md",
+    "CHANGELOG.md",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "npm run build:esm && npm run build:cjs",
+    "build:changelog": "npx @discordx/changelog --root=src",
+    "build:cjs": "tsc --module CommonJs --outDir build/cjs && npm run postbuild:cjs",
+    "postbuild:cjs": "node scripts/postbuild.mjs --path=build",
+    "build:esm": "tsc",
+    "type-check": "tsc --noemit",
+    "format": "prettier --write .",
+    "format-check": "prettier --check .",
+    "lint": "eslint ./"
+  },
+  "license": "Apache-2.0",
+  "homepage": "https://discord-ts.js.org",
+  "bugs": {
+    "url": "https://github.com/oceanroleplay/discord.ts/issue",
+    "email": "indianoceanroleplay@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oceanroleplay/discord-spams"
+  },
+  "contributors": [
+    "Vijay Meena <indianoceanroleplay@gmail.com> (https://github.com/oceanroleplay)"
+  ],
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.11.0",
+    "@typescript-eslint/parser": "^5.11.0",
+    "eslint": "^8.8.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-typescript-sort-keys": "^2.1.0",
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.5"
+  }
+}
