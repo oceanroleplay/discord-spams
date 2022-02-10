@@ -14,6 +14,10 @@ export class SpamMeta {
     // empty constructor
   }
 
+  static clear(): void {
+    this._spamLinks = [];
+  }
+
   static addLink(...link: string[]): SpamMeta {
     link.forEach((lk) => {
       if (lk.length && !this._spamLinks.includes(lk)) {
