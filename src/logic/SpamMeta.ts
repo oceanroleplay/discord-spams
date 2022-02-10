@@ -1,20 +1,14 @@
-import { dirname, isESM } from "@discordx/importer";
-import fs from "node:fs/promises";
-import path from "node:path";
+import axios from "axios";
 
-const _dirname = isESM ? dirname(import.meta.url) : __dirname;
+const globalListUrl =
+  "https://raw.githubusercontent.com/oceanroleplay/discord-spams/main/src/spamLinks.txt";
 
 export class SpamMeta {
   private static _instance: SpamMeta;
-  private _spamLinks: string[] = [];
-  private _logs = false;
+  private static _spamLinks: string[] = [];
 
-  get spamLinks(): string[] {
+  static get spamLinks(): string[] {
     return this._spamLinks;
-  }
-
-  get instance(): SpamMeta {
-    return SpamMeta.instance;
   }
 
   private constructor() {
@@ -28,28 +22,25 @@ export class SpamMeta {
     return this._instance;
   }
 
-  async readList(filepath: string): Promise<string[]> {
-    const data = await fs.readFile(filepath, {
-      encoding: "utf8",
+  static addLink(...link: string[]): SpamMeta {
+    link.forEach((lk) => {
+      if (lk.length && !this._spamLinks.includes(lk)) {
+        this._spamLinks.push(lk);
+      }
     });
 
-    return data.replaceAll("\r", "").split("\n");
-  }
-
-  async init(logs?: boolean): Promise<void> {
-    if (logs) {
-      this._logs = true;
-    }
-
-    this._spamLinks = await this.readList(path.join(_dirname, "spamLinks.txt"));
-  }
-
-  addLink(...link: string[]): SpamMeta {
-    this._spamLinks.push(...link);
     return this.instance;
   }
 
-  isSpam(content: string): boolean {
-    return this._spamLinks.some((link) => RegExp(link).test(content));
+  static isSpam(content: string): boolean {
+    return this._spamLinks.some((link) => {
+      return RegExp(link, "gm").test(content);
+    });
+  }
+
+  static async refreshMasterList(): Promise<void> {
+    const response = await axios.get<string>(globalListUrl);
+
+    this.addLink(...response.data.replaceAll("\r", "").split("\n"));
   }
 }
