@@ -46,6 +46,11 @@ npm install discord-spams
 yarn add discord-spams
 ```
 
+# FAQ
+
+1. How to deal with new spam messages and links?
+   In your bot, create a command that allows all users to report links. On the bot side, add that link to spam storage using `SpamMeta.addLink("cars-dont-fly.com");`. Later, Please report on our repository later so we can add it to the global list.
+
 # ☎️ Need help?
 
 Ask in **[discord server](https://discord.gg/yHQY9fexH9)**

@@ -1,2 +1,1 @@
-export * from "./detector.js";
-export * from "./spamLinks.js";
+export * from "./logic/SpamMeta.js";
