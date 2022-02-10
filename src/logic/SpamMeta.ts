@@ -4,7 +4,6 @@ const globalListUrl =
   "https://raw.githubusercontent.com/oceanroleplay/discord-spams/main/src/spamLinks.txt";
 
 export class SpamMeta {
-  private static _instance: SpamMeta;
   private static _spamLinks: string[] = [];
 
   static get spamLinks(): string[] {
@@ -15,13 +14,6 @@ export class SpamMeta {
     // empty constructor
   }
 
-  static get instance(): SpamMeta {
-    if (!this._instance) {
-      this._instance = new SpamMeta();
-    }
-    return this._instance;
-  }
-
   static addLink(...link: string[]): SpamMeta {
     link.forEach((lk) => {
       if (lk.length && !this._spamLinks.includes(lk)) {
@@ -29,7 +21,7 @@ export class SpamMeta {
       }
     });
 
-    return this.instance;
+    return this;
   }
 
   static isSpam(content: string): boolean {

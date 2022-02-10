@@ -1,6 +1,6 @@
 {
   "name": "discord-spams",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Discord spam protection library written in TypeScript by the discord.ts community",
   "exports": {
     ".": {
