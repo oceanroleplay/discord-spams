@@ -46,7 +46,7 @@ npm install discord-spams
 yarn add discord-spams
 ```
 
-# Example
+# 📟 Example
 
 ```ts
 @Discord()
@@ -59,14 +59,17 @@ export class Spam {
       return;
     }
 
+    // update master list every five minute, will not be updated if event is not called
     if (!this.lastUpdate || Date.now() - this.lastUpdate > 5 * 60 * 1000) {
       await SpamMeta.refreshMasterList();
       this.lastUpdate = Date.now();
     }
 
     if (SpamMeta.isSpam(message.content)) {
+      // delete message, if bot have permissions
       await message.delete().catch(() => null);
 
+      // mute member for 6 hours
       const isMuted = await message.member
         .disableCommunicationUntil(
           Date.now() + 6 * 60 * 60 * 1000,
@@ -88,7 +91,7 @@ export class Spam {
 }
 ```
 
-# FAQ
+# 🙋 FAQ
 
 ## 1. How to deal with new spam messages and links?
 
