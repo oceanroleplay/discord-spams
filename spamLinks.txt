@@ -1,2 +1,2 @@
 (?!.*https:\/\/discord\.gift).*(?:http|https):\/\/di.*(?:gift|nitro).?
-(?:http|https):\/\/(boost).*(nitro)\S+
+(?:http|https):\/\/(boost|nitro|gift).*(boost|nitro|gift).(\w+)
