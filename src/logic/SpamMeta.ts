@@ -34,7 +34,12 @@ export class SpamMeta {
     });
   }
 
-  static async refreshMasterList(): Promise<void> {
+  static async refreshMasterList(options?: {
+    disableClear?: true;
+  }): Promise<void> {
+    if (!options?.disableClear) {
+      this.clear();
+    }
     const response = await axios.get<string>(globalListUrl);
 
     this.addLink(...response.data.replaceAll("\r", "").split("\n"));
