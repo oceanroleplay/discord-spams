@@ -1,3 +1,3 @@
 (?!.*https:\/\/discord\.gift).*(?:http|https):\/\/di.*(?:gift|nitro).?
-(?:http|https):\/\/(boost|nitro|gift).*(boost|nitro|gift).(\w+)
+(?:http|https):\/\/(boost|nitro|gift|dlscord).*(boost|nitro|gift|dlscord).(\w+)
 https:\/\/bit\.ly\/SkyBlade
